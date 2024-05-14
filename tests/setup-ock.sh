@@ -35,6 +35,11 @@ if [ $? -eq 1 ]; then
 	exit 77
 fi
 
+#######################################
+echo "## List tokens"
+GNUTLS_PIN=${OCK_USER_PIN}			\
+${P11TOOL} --list-token-urls
+
 echo "##################################################"
 echo "## Setup test environment (module: ock)"
 echo "##"
@@ -127,6 +132,10 @@ ${P11TOOL} --write --label ${LABEL}		\
 	   --load-pubkey=${FILE_PEM_RSA4K_PUB}	\
 	   "${URI_TOKEN}" 2> /dev/null		\
 || exit 99
+
+GNUTLS_PIN=${OCK_USER_PIN}			\
+${P11TOOL} --list-keys				\
+	   "${URI_TOKEN}" 2> /dev/null
 
 #######################################
 echo "## Generate openssl config file"
