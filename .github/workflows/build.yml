@@ -30,7 +30,8 @@ jobs:
               dnf -y install gcc g++
             fi
             if [ "${{ matrix.token }}" = "ock" ]; then
-              dnf -y install opencryptoki opencryptoki-swtok gnutls-utils
+              dnf -y install opencryptoki opencryptoki-swtok gnutls-utils \
+                procps-ng
             fi
           fi
       - name: Prep soft-tokens
